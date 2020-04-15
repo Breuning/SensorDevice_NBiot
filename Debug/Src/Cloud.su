@@ -1,0 +1,7 @@
+Cloud.c:29:6:SendDataToNBiot	176	static
+Cloud.c:61:13:AddMessageToJsonObj	16	static
+Cloud.c:71:13:_addIntToJson	32	static
+Cloud.c:86:13:_addFloatToJson	40	static
+Cloud.c:94:13:_addDataToJson	32	static
+Cloud.c:119:13:AddDataToJson	24	static
+Cloud.c:131:13:AddDevNumToJson	80	static

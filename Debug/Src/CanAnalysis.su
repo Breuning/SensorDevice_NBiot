@@ -1,0 +1,4 @@
+CanAnalysis.c:25:6:CanAnalysis	16	static
+CanAnalysis.c:70:13:Can_TxSensorData	24	static
+CanAnalysis.c:89:17:Get_CanSensor_FrameID	24	static
+CanAnalysis.c:108:20:Get_CanSensor_Type	32	static

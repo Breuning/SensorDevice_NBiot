@@ -1,0 +1,5 @@
+bsp_internal_flash.c:35:5:FlashWriteLenByte	32	static
+bsp_internal_flash.c:90:6:FlashInit	4	static
+bsp_internal_flash.c:121:6:FLASH_ReadBytes	40	static
+bsp_internal_flash.c:129:10:FLASH_ReadHalfWord	16	static
+bsp_internal_flash.c:134:6:FLASH_ClearWord	16	static

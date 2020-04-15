@@ -1,0 +1,17 @@
+usart.c:46:6:MX_UART4_Init	8	static
+usart.c:65:6:MX_USART1_UART_Init	8	static
+usart.c:84:6:MX_USART2_UART_Init	8	static
+usart.c:103:6:MX_USART3_UART_Init	8	static
+usart.c:121:6:HAL_UART_MspInit	64	static
+usart.c:341:6:HAL_UART_MspDeInit	16	static
+usart.c:442:6:UART_IT_IDLE_InitAll	8	static
+usart.c:451:6:UART_IT_IDLE_Init	24	static
+usart.c:467:6:UARTReceive_IDLECallback	32	static
+usart.c:491:6:UART2_SendData	24	static
+usart.c:500:6:UART2_SendByte	16	static
+usart.c:506:6:UART2_SendString	16	static
+usart.c:518:6:UART1_SendData	24	static
+usart.c:527:6:UART1_SendByte	16	static
+usart.c:533:6:UART1_SendString	16	static
+usart.c:546:6:LoraUart_SendData	16	static
+usart.c:552:6:PCUart_SendData	16	static

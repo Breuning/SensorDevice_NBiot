@@ -1,0 +1,3 @@
+FilterAlgorithm.c:20:6:FiltetAlgorithmforSensors	24	static
+FilterAlgorithm.c:54:17:smoothaverage_lib_X	32	static
+FilterAlgorithm.c:93:6:LimitBreadthFilter	16	static

@@ -1,0 +1,2 @@
+NTC.c:257:6:NTC_ifAvailable	16	static
+NTC.c:267:6:GetWaterTemFromNTC	40	static

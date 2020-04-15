@@ -1,0 +1,2 @@
+BH1750.c:20:6:BH1750_Init	16	static
+BH1750.c:29:6:GetValidDataFromBH1750	24	static

@@ -1,0 +1,11 @@
+NBiotTask.c:78:6:NBiot_Init	8	static
+NBiotTask.c:93:6:NBiot_QMTInit	8	static
+NBiotTask.c:109:6:NBiot_Task	24	static
+NBiotTask.c:142:6:NBiot_QMTOPENCONN	8	static
+NBiotTask.c:157:6:NBiot_QMTPUB	16	static
+NBiotTask.c:187:6:NBiot_Reset	8	static
+NBiotTask.c:197:6:NBiot_USIMConfig	8	static
+NBiotTask.c:209:6:NBiot_NetworkRegis	16	static
+NBiotTask.c:236:6:NBiot_GetIMEI	16	static
+NBiotTask.c:251:6:NBiot_ATSend	16	static
+NBiotTask.c:257:6:NBiot_CleanRXBuf	8	static

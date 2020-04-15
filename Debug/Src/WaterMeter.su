@@ -1,0 +1,4 @@
+WaterMeter.c:17:6:GetValidDataFromWaterMet	24	static
+WaterMeter.c:52:10:BCDtoDecimal	16	static
+WaterMeter.c:57:6:RS485Uart_RX_TX_Switch	16	static
+WaterMeter.c:139:10:CRC16	24	static
