@@ -6,4 +6,4 @@ adc.c:199:10:ADC_ReadData	16	static
 adc.c:214:10:ADC_Average	24	static
 adc.c:228:6:GetValidDataFromPressure	24	static
 adc.c:255:6:GetValidDataFromWindowPos	24	static
-adc.c:287:6:Get_WindowPos_NewPushrod	24	static
+adc.c:289:6:Get_WindowPos_NewPushrod	24	static

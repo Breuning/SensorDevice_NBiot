@@ -263,7 +263,9 @@ void GetValidDataFromWindowPos(void)
     if(v < 0.4)                 //电压如果小于0.64V认为探头离线
     	return;
     else
+    {
     	Tick_GetSensorData = HAL_GetTick();
+    }
 
 	l = (((v / 160) * 1000 )- 4) * ((1000 - 0) / (20 - 4));     //电压值转换为相应的位移值
 

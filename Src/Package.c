@@ -49,7 +49,7 @@ void PackageComposition(void)
 
 		strcpy((char *)CloudPackage, (const char *)jsonOutPutBuf);
 //		HAL_UART_Transmit(&huart2, (uint8_t *)jsonOutPutBuf, sizeof(jsonOutPutBuf), 1000);  	//将数组内的数据通过USART2发送至NB
-		LED1_RJ45_Blink();																		//发一包数据闪一次灯
+//		LED1_RJ45_Blink();																		//发一包数据闪一次灯
 	}
 
 	HAL_Delay(100);
@@ -137,7 +137,7 @@ static void AddDataToJson(cJSON *root, uint8_t datatype, uint8_t order, float da
 static void AddDevNumToJson(cJSON *root, const char *name, uint8_t datatype, uint8_t order)
 {
 	uint8_t typord[5]  = { 0 };
-	uint8_t devnum[20] = { 0 };
+	uint8_t devnum[21] = { 0 };
 
 	strcpy((char *)devnum, (const char *)NBiotIMEI);
 	sprintf((char*)typord, "-%02d-%d", datatype, order);   //将NBiotIMEI与传感器类型、传感器编号放在一起

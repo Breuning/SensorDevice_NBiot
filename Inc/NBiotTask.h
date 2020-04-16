@@ -10,7 +10,7 @@
 
 #include "stm32f1xx_hal.h"
 
-extern uint8_t NBiotIMEI[15];
+extern uint8_t NBiotIMEI[16];
 extern void NBiot_Task();
 extern void NBiot_Init();
 
@@ -35,7 +35,7 @@ typedef enum
 	AT_QMTTIMEOUT,
 
 	AT_QMTOPEN,
-	AT_QMTCONN,
+//	AT_QMTCONN,
 
 	AT_QMTOPENTEST,
 	AT_QMTCONNTEST,

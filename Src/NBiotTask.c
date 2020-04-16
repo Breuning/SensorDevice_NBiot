@@ -28,7 +28,13 @@ static void NBiot_GetIMEI();
 static void NBiot_QMTOPENCONN();
 static void NBiot_QMTPUB();
 
-uint8_t NBiotIMEI[15] = { 0 };
+static void Get_ATQMTCONN();
+static void Get_MCUUID();
+
+
+uint8_t NBiotIMEI[16] = { 0 };
+uint8_t MCUID[25] = { 0 };
+uint8_t ATCmds_QMTCONN[100] = { 0 };
 
 const char *ATCmds[] =
 {
@@ -50,13 +56,13 @@ const char *ATCmds[] =
 	"AT+QMTCFG=\"timeout\",0,5,3,0\r\n",
 
 	"AT+QMTOPEN=0,\"121.42.31.73\",61613\r\n",
-	"AT+QMTCONN=0,\"clientExample\",\"admin\",\"ibs_admin\"\r\n",
+//	"AT+QMTCONN=0,\"clientExample\",\"admin\",\"ibs_admin\"\r\n",
 
 	"AT+QMTOPEN?\r\n",
 	"AT+QMTCONN?\r\n",
 
-	"AT+QMTPUB=0,0,0,1,\"mqttTopicIbs\"\r\n",
-
+//	"AT+QMTPUB=0,0,0,1,\"mqttTopicIbs\"\r\n",
+	"AT+QMTPUB=0,0,0,1,\"nbtest\"\r\n",
 };
 
 const char *ATAck[] =
@@ -77,6 +83,9 @@ const char *ATAck[] =
 
 void NBiot_Init()
 {
+	Get_MCUUID();
+	Get_ATQMTCONN();
+
 	NBiot_Reset();
 //	while(1);
 
@@ -149,7 +158,7 @@ void NBiot_QMTOPENCONN()
 	HAL_Delay(1000);                     //办公室测试在800ms内
 	NBiot_CleanRXBuf();
 
-	NBiot_ATSend(ATCmds[AT_QMTCONN]);
+	NBiot_ATSend((const char *)ATCmds_QMTCONN);
 	HAL_Delay(1000);
 	NBiot_CleanRXBuf();
 }
@@ -261,6 +270,35 @@ void NBiot_CleanRXBuf()
 		memset(NBUart_RX.RX_Buf, 0 , sizeof(NBUart_RX.RX_Buf));
 	}
 }
+
+/*获取stm32芯片ID*/
+void Get_MCUUID()
+{
+	uint32_t UID[3];
+
+	HAL_GetUID(UID);   //读取芯片的96位唯一标识ID
+	sprintf((char*)MCUID, "%0*lx", 8, UID[0]);
+	sprintf((char*)MCUID + 8, "%0*lx", 8, UID[1]);
+	sprintf((char*)MCUID + 16, "%0*lx", 8, UID[2]);
+}
+
+/*形成AT_QMTCONN指令*/
+void Get_ATQMTCONN()
+{
+//	"AT+QMTCONN=0,\"clientExample\",\"admin\",\"ibs_admin\"\r\n";
+
+	char *temp1 = "AT+QMTCONN=0,\"";
+	char *temp2 = "\",\"admin\",\"ibs_admin\"\r\n";
+
+	strcpy((char *)ATCmds_QMTCONN, (const char *)temp1);
+	strcat((char *)ATCmds_QMTCONN, (const char *)MCUID);
+	strcat((char *)ATCmds_QMTCONN, (const char *)temp2);
+}
+
+
+
+
+
 
 
 
