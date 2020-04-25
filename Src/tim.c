@@ -21,8 +21,9 @@
 #include "tim.h"
 
 /* USER CODE BEGIN 0 */
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 #include "CanAnalysis.h"
+#include "NBiotTask.h"
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;
@@ -242,7 +243,25 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)     //定时器中断回调
 
 	if(htim == &htim5) // TIM5定时5s进来一次
     {
-    	SensorReadTimerFlag = TRUE;
+		static uint8_t T5Count_Sensor = 0;
+		static uint8_t T5Count_NBiot  = 0;
+
+		T5Count_Sensor++;
+		T5Count_NBiot++;
+
+		if(T5Count_Sensor >= 1)
+		{
+			SensorReadTimerFlag = TRUE;
+			T5Count_Sensor = 0;
+		}
+
+		if(T5Count_NBiot >= 2)
+		{
+			NBiotTaskTimerFlag = TRUE;
+			T5Count_NBiot = 0;
+		}
+
+
     	Time_cnt++;
 //    	htim->Instance->CNT = 0;                               		  //每次中断回调函数执行后进行计数器清零
     }

@@ -1,12 +1,12 @@
 /*
- * SensorAnalysis.h
+ * Sensor_Task.h
  *
  *  Created on: 2019Äê7ÔÂ25ÈÕ
  *      Author: Breuning
  */
 
-#ifndef SENSORANALYSIS_H_
-#define SENSORANALYSIS_H_
+#ifndef SENSORTASK_H_
+#define SENSORTASK_H_
 
 #include "stm32f1xx_hal.h"
 #include "main.h"
@@ -61,7 +61,7 @@ typedef enum
 
 
 void Get_SensorData();
-void SensorAnalysis();
+void Sensor_Task();
 
 float GetFloatSensorData(FloatSensorDataType type);
 
@@ -70,4 +70,4 @@ extern Sensor_Data_Struct Sensor_Data;
 extern uint32_t Tick_GetSensorData;
 
 
-#endif /* SENSORANALYSIS_H_ */
+#endif /* SENSORTASK_H_ */

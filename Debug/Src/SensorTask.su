@@ -1,0 +1,3 @@
+SensorTask.c:29:6:Sensor_Task	8	static
+SensorTask.c:58:6:Get_SensorData	8	static
+SensorTask.c:116:7:GetFloatSensorData	136	static

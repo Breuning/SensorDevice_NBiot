@@ -105,7 +105,7 @@ uint32_t LoraNode_SetMINIRF(uint32_t value)
 
 	memset(AT_Data_buf,0,RXLEN);	       //清空缓存区AT_Data_buf
 
-	LoraNode_Send_AT(MINI);
+	LoraNode_Send_AT((char *)MINI);
 	LoraNode_Read(AT_Data_buf);	       	   //接收AT指令的返回值放到AT_Data_buf中
 
 	if(StringStr((char *)AT_Data_buf, temp) != NULL)
@@ -132,7 +132,7 @@ uint32_t LoraNode_SetRADIO(uint32_t f)
 
 	memset(AT_Data_buf,0,RXLEN);	       //清空缓存区AT_Data_buf
 
-	LoraNode_Send_AT(SetRADIO);
+	LoraNode_Send_AT((char *)SetRADIO);
 
 	LoraNode_Read(AT_Data_buf);	     	   //接收AT指令的返回值放到AT_Data_buf中
 
@@ -161,7 +161,7 @@ uint32_t LoraNode_SetPERIPH(uint32_t f)
 
 	memset(AT_Data_buf,0,RXLEN);	       //清空缓存区AT_Data_buf
 
-	LoraNode_Send_AT(SetPERIPH);
+	LoraNode_Send_AT((char *)SetPERIPH);
 
 	LoraNode_Read(AT_Data_buf);	     	   //接收AT指令的返回值放到AT_Data_buf中
 
@@ -307,7 +307,7 @@ uint32_t LoraNode_SetP2P(uint32_t f,uint8_t a,uint8_t b,uint8_t c,uint8_t d,uint
 
 	memset(AT_Data_buf,0,RXLEN);	       //清空缓存区AT_Data_buf
 
-	LoraNode_Send_AT(SetDebug);
+	LoraNode_Send_AT((char *)SetDebug);
 
 	LoraNode_Read(AT_Data_buf);	     	   //接收AT指令的返回值放到AT_Data_buf中
 

@@ -5,6 +5,8 @@
  *      Author: Breuning
  */
 
+#include "main.h"
+#include "HardwareInit.h"
 #include "NBiotTask.h"
 #include "usart.h"
 #include "Package.h"
@@ -26,6 +28,7 @@ static void NBiot_ATSend(const char *cmd);
 static void NBiot_GetIMEI();
 
 static void NBiot_QMTOPENCONN();
+static void NBiot_QMTSUB();
 static void NBiot_QMTPUB();
 
 static void Get_ATQMTCONN();
@@ -35,6 +38,8 @@ static void Get_MCUUID();
 uint8_t NBiotIMEI[16] = { 0 };
 uint8_t MCUID[25] = { 0 };
 uint8_t ATCmds_QMTCONN[100] = { 0 };
+
+BOOL NBiotTaskTimerFlag = FALSE;
 
 const char *ATCmds[] =
 {
@@ -58,11 +63,13 @@ const char *ATCmds[] =
 	"AT+QMTOPEN=0,\"121.42.31.73\",61613\r\n",
 //	"AT+QMTCONN=0,\"clientExample\",\"admin\",\"ibs_admin\"\r\n",
 
+	"AT+QMTSUB=0,1,\"mqttTopicAlarm\",2\r\n",
+
 	"AT+QMTOPEN?\r\n",
 	"AT+QMTCONN?\r\n",
 
-//	"AT+QMTPUB=0,0,0,1,\"mqttTopicIbs\"\r\n",
-	"AT+QMTPUB=0,0,0,1,\"nbtest\"\r\n",
+	"AT+QMTPUB=0,0,0,1,\"mqttTopicIbs\"\r\n",
+//	"AT+QMTPUB=0,0,0,1,\"nbtest\"\r\n",
 };
 
 const char *ATAck[] =
@@ -113,6 +120,7 @@ void NBiot_QMTInit()
 	NBiot_CleanRXBuf();
 
 	NBiot_QMTOPENCONN();
+	NBiot_QMTSUB();
 }
 
 void NBiot_Task()
@@ -121,30 +129,36 @@ void NBiot_Task()
 	char *Ack_QMTCONNTEST = "+QMTCONN: 0,3";
 	char *a = NULL, *b = NULL;
 
-	NBiot_ATSend(ATCmds[AT_QMTOPENTEST]);
-	if(NBUart_RX.receive_flag)
+	if(NBiotTaskTimerFlag == TRUE)              //通过TIM5设置为NBiot每1min上传一次数据包
 	{
-		NBUart_RX.receive_flag = 0;
-		a = strstr((const char *)NBUart_RX.RX_Buf, Ack_QMTOPENTEST);
-		memset(NBUart_RX.RX_Buf, 0 , sizeof(NBUart_RX.RX_Buf));
-	}
+		NBiotTaskTimerFlag = FALSE;
 
-	NBiot_ATSend(ATCmds[AT_QMTCONNTEST]);
-	if(NBUart_RX.receive_flag)
-	{
-		NBUart_RX.receive_flag = 0;
-		b = strstr((const char *)NBUart_RX.RX_Buf, Ack_QMTCONNTEST);
-		memset(NBUart_RX.RX_Buf, 0 , sizeof(NBUart_RX.RX_Buf));
-	}
+		NBiot_ATSend(ATCmds[AT_QMTOPENTEST]);
+		if(NBUart_RX.receive_flag)
+		{
+			NBUart_RX.receive_flag = 0;
+			a = strstr((const char *)NBUart_RX.RX_Buf, Ack_QMTOPENTEST);
+			memset(NBUart_RX.RX_Buf, 0 , sizeof(NBUart_RX.RX_Buf));
+		}
+
+		NBiot_ATSend(ATCmds[AT_QMTCONNTEST]);
+		if(NBUart_RX.receive_flag)
+		{
+			NBUart_RX.receive_flag = 0;
+			b = strstr((const char *)NBUart_RX.RX_Buf, Ack_QMTCONNTEST);
+			memset(NBUart_RX.RX_Buf, 0 , sizeof(NBUart_RX.RX_Buf));
+		}
 
 
-	if(a != NULL && b != NULL)
-	{
-		NBiot_QMTPUB();
-	}
-	else
-	{
-		NBiot_QMTOPENCONN();
+		if(a != NULL && b != NULL)
+		{
+			NBiot_QMTPUB();
+		}
+		else
+		{
+			NBiot_QMTOPENCONN();
+			NBiot_QMTSUB();
+		}
 	}
 }
 
@@ -163,6 +177,17 @@ void NBiot_QMTOPENCONN()
 	NBiot_CleanRXBuf();
 }
 
+void NBiot_QMTSUB()
+{
+//	char *temp = "+QMTSUB: 0,1,0,2";
+	if(Sensor_Type == Alarm_Type)
+	{
+		NBiot_ATSend(ATCmds[AT_QMTSUB]);
+		HAL_Delay(1000);                     //办公室测试在800ms内
+		NBiot_CleanRXBuf();
+	}
+}
+
 void NBiot_QMTPUB()
 {
 	char *temp1 = ">";
@@ -173,7 +198,6 @@ void NBiot_QMTPUB()
 
 	cmdAT_QMTPUB:
 	NBiot_ATSend(ATCmds[AT_QMTPUB]);
-	HAL_Delay(100);
 	if(NBUart_RX.receive_flag)
 	{
 		NBUart_RX.receive_flag = 0;
@@ -188,7 +212,7 @@ void NBiot_QMTPUB()
 	NBiot_ATSend((char *)CloudPackage);
 	memset(CloudPackage, 0 , sizeof(CloudPackage));
 
-	HAL_Delay(3000);
+	HAL_Delay(1000);
 	NBiot_CleanRXBuf();
 }
 
@@ -259,7 +283,7 @@ void NBiot_GetIMEI()
 void NBiot_ATSend(const char *cmd)
 {
 	HAL_UART_Transmit(&huart2, (uint8_t *)cmd, strlen(cmd), 100);
-	HAL_Delay(200);
+	HAL_Delay(100);
 }
 
 void NBiot_CleanRXBuf()
@@ -294,6 +318,18 @@ void Get_ATQMTCONN()
 	strcat((char *)ATCmds_QMTCONN, (const char *)MCUID);
 	strcat((char *)ATCmds_QMTCONN, (const char *)temp2);
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

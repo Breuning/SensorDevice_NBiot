@@ -8,7 +8,7 @@
 #include "main.h"
 #include "Gas.h"
 #include "usart.h"
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 #include "HardwareInit.h"
 
 

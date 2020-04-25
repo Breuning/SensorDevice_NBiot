@@ -39,6 +39,7 @@
 #define  WindowPosition_Type 				0xAD
 #define  Gas_O2_Type 						0xB1
 #define  Water_Meter_Type                   0xB2
+#define  Alarm_Type                         0xB3
 
 void Hardware_Init(void);
 void Get_SensorType(void);

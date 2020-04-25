@@ -7,7 +7,7 @@
 
 #include "NTC.h"
 #include "adc.h"
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 
 const ntcData_t ntc_3950_data[] =
 {

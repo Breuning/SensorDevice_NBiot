@@ -8,7 +8,7 @@
 #include <string.h>
 #include "BH1750.h"
 #include "i2c.h"
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 
 uint8_t BH1750_PowON_Command = BH1750_PowON;
 uint8_t BH1750_RSET_Command = BH1750_RSET;

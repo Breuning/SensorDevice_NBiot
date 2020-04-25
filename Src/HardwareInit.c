@@ -49,7 +49,7 @@ void Get_SensorType(void)
 		WindowPosition_Type,				//12  小窗推杆位移
 		Gas_O2_Type,						//13 氧气
 		Water_Meter_Type,                   //14 水表
-		0,
+		Alarm_Type,                         //15报警器
 		0,
 		0,
 		0,

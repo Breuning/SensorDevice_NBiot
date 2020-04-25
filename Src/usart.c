@@ -444,7 +444,7 @@ void UART_IT_IDLE_InitAll(void)
 		UART_IT_IDLE_Init(&huart1, LoraUart_RX.RX_Buf, RECEIVELEN);	   //UART1--与Lora相连                                                   9600
 		UART_IT_IDLE_Init(&huart2, NBUart_RX.RX_Buf, RECEIVELEN);      //UART2--与NBiot相连(可拔插与PC相连用于调试)    115200
 		UART_IT_IDLE_Init(&huart3, GasUart_RX.RX_Buf, RECEIVELEN);     //UART3--与Gas传感器相连                                          9600
-		UART_IT_IDLE_Init(&huart4, RS485Uart_RX.RX_Buf, RECEIVELEN);   //UART4--与RS485相连(水表)                     9600
+		UART_IT_IDLE_Init(&huart4, RS485Uart_RX.RX_Buf, RECEIVELEN);   //UART4--与RS485相连(水表和报警器) 	 	      9600
 }
 
 //串口接收空闲中断初始化

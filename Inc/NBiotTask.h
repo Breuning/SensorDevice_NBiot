@@ -8,8 +8,10 @@
 #ifndef NBIOTTASK_H_
 #define NBIOTTASK_H_
 
+#include "main.h"
 #include "stm32f1xx_hal.h"
 
+extern BOOL NBiotTaskTimerFlag;
 extern uint8_t NBiotIMEI[16];
 extern void NBiot_Task();
 extern void NBiot_Init();
@@ -36,6 +38,8 @@ typedef enum
 
 	AT_QMTOPEN,
 //	AT_QMTCONN,
+
+	AT_QMTSUB,
 
 	AT_QMTOPENTEST,
 	AT_QMTCONNTEST,

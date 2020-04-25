@@ -31,13 +31,14 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 #include "LoraAnalysis.h"
 #include "CanAnalysis.h"
 #include "LoraNode.h"
 #include "SHT30.h"
 #include "Led.h"
 #include "NBiotTask.h"
+#include "AlarmTask.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -143,13 +144,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	SensorAnalysis();
+	Sensor_Task();
+	NBiot_Task();
+	Alarm_Task();
+
 //	LoraAnalysis();
 //	CanAnalysis();
-
-	NBiot_Task();
-
-	HAL_Delay(2000);
 
 //	HAL_IWDG_Refresh(&hiwdg);     //喂狗，即重新加载计数值
   }

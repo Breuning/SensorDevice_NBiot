@@ -9,7 +9,7 @@
 #include "can.h"
 #include "CanAnalysis.h"
 #include "HardwareInit.h"
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 
 static uint16_t Get_CanSensor_FrameID(uint8_t sensorid);
 static CanSensor_t Get_CanSensor_Type(uint8_t sensorid);

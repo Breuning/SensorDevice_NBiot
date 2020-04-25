@@ -11,7 +11,7 @@
 #include "MD5.h"
 #include "usart.h"
 #include "HardwareInit.h"
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 #include "NBiotTask.h"
 
 uint8_t CloudPackage[100] = { 0 };
@@ -117,6 +117,9 @@ static void _addDataToJson(cJSON *root)
 			break;
 		case Water_Meter_Type:
 			AddDataToJson(root, 6, 1, (float)Sensor_Data.WaterMeter, 0);
+			break;
+		case Alarm_Type:
+			AddDevNumToJson(root, "devNum", 10, 1);
 			break;
 	}
 

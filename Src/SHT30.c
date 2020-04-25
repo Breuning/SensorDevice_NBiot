@@ -8,7 +8,7 @@
 #include "stm32f1xx_hal.h"
 #include "SHT30.h"
 #include "tim.h"
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 #include "FilterAlgorithm.h"
 #include "i2c.h"
 

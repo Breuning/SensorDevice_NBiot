@@ -1,5 +1,5 @@
 /*
- * SensorAnalysis.c
+ * SensorTask.c
  *
  *  Created on: 2019年7月25日
  *      Author: Breuning
@@ -7,7 +7,7 @@
 
 #include "string.h"
 #include "HardwareInit.h"
-#include "SensorAnalysis.h"
+#include "SensorTask.h"
 #include "adc.h"
 #include "usart.h"
 #include "SHT30.h"
@@ -26,7 +26,7 @@ char SensorData_Buff[30];
 
 
 
-void SensorAnalysis(void)
+void Sensor_Task(void)
 {
 
 	if(SensorReadTimerFlag == TRUE)              //通过TIM5设置为每5秒读取一次传感器数值
