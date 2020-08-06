@@ -24,6 +24,7 @@
 #include "SensorTask.h"
 #include "CanAnalysis.h"
 #include "NBiotTask.h"
+#include "LED.h"
 /* USER CODE END 0 */
 
 TIM_HandleTypeDef htim2;
@@ -231,50 +232,67 @@ void Delay_us(uint16_t us)                                     //ÀûÓÃTIM2ÊµÏÖusÑ
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)     //¶¨Ê±Æ÷ÖÐ¶Ï»Øµ÷º¯Êý
 {
-	static uint8_t Time_cnt = 0;
 
 	if(htim == &htim3) // TIM3¶¨Ê±1s½øÀ´Ò»´Î
 	{
-		HAL_GPIO_TogglePin(LED1_RUNNING_GPIO_Port, LED1_RUNNING_Pin); //ÔËÐÐµÆ·´×ª
+//		static uint8_t T3Count_NETLED = 0;
+//
+//		T3Count_NETLED++;
+//
+//		if(T3Count_NETLED >= 2)
+//		{
+//			T3Count_NETLED = 0;
+//
+//			if(NETWORK_RegisteredFlag)
+//			{
+//				LED2_NETWORK_Registered();
+//			}
+//			else
+//			{
+//				LED2_NETWORK_Searching();
+//			}
+//
+//		}
 
+		HAL_GPIO_TogglePin(LED1_RUNNING_GPIO_Port, LED1_RUNNING_Pin); //ÔËÐÐµÆ·´×ª
+		HAL_GPIO_TogglePin(LED2_NETWORK_GPIO_Port, LED2_NETWORK_Pin);
 		CanDataSendTimerFlag = TRUE;
 	}
 
 
 	if(htim == &htim5) // TIM5¶¨Ê±5s½øÀ´Ò»´Î
     {
-		static uint8_t T5Count_Sensor = 0;
-		static uint8_t T5Count_NBiot  = 0;
+		static uint8_t T5Count_Sensor    = 0;
+		static uint8_t T5Count_NBiot     = 0;
+		static uint8_t T5Count_McuReset  = 0;
 
 		T5Count_Sensor++;
 		T5Count_NBiot++;
+		T5Count_McuReset++;
 
-		if(T5Count_Sensor >= 1)
+		if(T5Count_Sensor >= 6)
 		{
 			SensorReadTimerFlag = TRUE;
 			T5Count_Sensor = 0;
 		}
 
-		if(T5Count_NBiot >= 2)
+		if(T5Count_NBiot >= 12)
 		{
 			NBiotTaskTimerFlag = TRUE;
 			T5Count_NBiot = 0;
 		}
 
 
-    	Time_cnt++;
+		if(T5Count_McuReset >= 720)        //STM32¶¨Ê±ÖØÆô(720Îª1Ð¡Ê±)
+		{
+			McuReset();
+			T5Count_McuReset = 0;
+		}
+
+
+
 //    	htim->Instance->CNT = 0;                               		  //Ã¿´ÎÖÐ¶Ï»Øµ÷º¯ÊýÖ´ÐÐºó½øÐÐ¼ÆÊýÆ÷ÇåÁã
     }
-
-//	¶¨Ê±ÖØÆô
-//	if(Time_cnt >= 12)
-//	{ //1Min
-//
-//		__disable_fault_irq();
-//		NVIC_SystemReset();
-//		Time_cnt = 0;
-//	}
-
 
 }
 /* USER CODE END 1 */

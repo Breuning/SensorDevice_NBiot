@@ -61,6 +61,21 @@ void Get_SensorType(void)
 		Temperature_Humidity_Type,			//24  室内温湿度
 		Temperature_Humidity_Type,			//25  室内温湿度
 		Temperature_Humidity_Type,			//26  室内温湿度
+		Temperature_Humidity_Type,			//27  室内温湿度
+		Temperature_Humidity_Type,			//28  室内温湿度
+		Temperature_Humidity_Type,			//29  室内温湿度
+		Temperature_Humidity_Type,			//30  室内温湿度
+		Temperature_Humidity_Type,			//31  室内温湿度
+		Temperature_Humidity_Type,			//32  室内温湿度
+		Temperature_Humidity_Type,			//33  室内温湿度
+		Temperature_Humidity_Type,			//34  室内温湿度
+		Temperature_Humidity_Type,			//35  室内温湿度
+		Temperature_Humidity_Type,			//36  室内温湿度
+		Temperature_Humidity_Type,			//37  室内温湿度
+		Temperature_Humidity_Type,			//38  室内温湿度
+		Temperature_Humidity_Type,			//39  室内温湿度
+		Temperature_Humidity_Type,			//40  室内温湿度
+
 	};
 
 	Sensor_Type = Type[Sensor_ID];
@@ -69,7 +84,7 @@ void Get_SensorType(void)
 //获取传感器的硬件拨码
 void Get_SensorID(void)
 {
-	Sensor_ID = 1 + (SW1 * 1  + SW2 * 2  + SW3 * 4  + SW4 * 8 + SW5 * 16);
+	Sensor_ID = 1 + (SW1 * 1  + SW2 * 2  + SW3 * 4  + SW4 * 8 + SW5 * 16 +  + SW6 * 32);
 }
 
 void Sensor_Init(void)

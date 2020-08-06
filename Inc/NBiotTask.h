@@ -11,11 +11,16 @@
 #include "main.h"
 #include "stm32f1xx_hal.h"
 
-extern BOOL NBiotTaskTimerFlag;
+#define TickCount_UploadFaild 5*60*1000
+
 extern uint8_t NBiotIMEI[16];
+
+extern BOOL NETWORK_RegisteredFlag;
+
+extern BOOL NBiotTaskTimerFlag;
+
 extern void NBiot_Task();
 extern void NBiot_Init();
-
 
 typedef enum
 {

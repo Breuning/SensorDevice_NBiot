@@ -1,3 +1,5 @@
 Led.c:10:6:Led_Init	8	static
 Led.c:16:6:LED1_RUNNING_Blink	8	static
-Led.c:23:6:LED2_MSGTX_Blink	8	static
+Led.c:24:6:LED2_NETWORK_Searching	8	static
+Led.c:32:6:LED2_NETWORK_Registered	8	static
+Led.c:40:6:LED2_NETWORK_DataTransfer	16	static

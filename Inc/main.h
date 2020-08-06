@@ -55,12 +55,12 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
 void Hardware_Init(void); 
-
+void McuReset(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define LED2_MSGTX_Pin GPIO_PIN_13
-#define LED2_MSGTX_GPIO_Port GPIOC
+#define LED2_NETWORK_Pin GPIO_PIN_13
+#define LED2_NETWORK_GPIO_Port GPIOC
 #define LED1_RUNNING_Pin GPIO_PIN_14
 #define LED1_RUNNING_GPIO_Port GPIOC
 #define PC_TX_Pin GPIO_PIN_2

@@ -49,7 +49,7 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOC, LED2_MSGTX_Pin|LED1_RUNNING_Pin|LORANODE_NRST_Pin|LORANODE_BUSY_Pin 
+  HAL_GPIO_WritePin(GPIOC, LED2_NETWORK_Pin|LED1_RUNNING_Pin|LORANODE_NRST_Pin|LORANODE_BUSY_Pin 
                           |LORANODE_MODE_Pin|LORANODE_STAT_Pin|RS485_SEL_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
@@ -60,7 +60,7 @@ void MX_GPIO_Init(void)
 
   /*Configure GPIO pins : PCPin PCPin PCPin PCPin 
                            PCPin PCPin PCPin */
-  GPIO_InitStruct.Pin = LED2_MSGTX_Pin|LED1_RUNNING_Pin|LORANODE_NRST_Pin|LORANODE_BUSY_Pin 
+  GPIO_InitStruct.Pin = LED2_NETWORK_Pin|LED1_RUNNING_Pin|LORANODE_NRST_Pin|LORANODE_BUSY_Pin 
                           |LORANODE_MODE_Pin|LORANODE_STAT_Pin|RS485_SEL_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;

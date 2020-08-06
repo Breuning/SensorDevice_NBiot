@@ -50,7 +50,7 @@ void Alarm_Control()
 
 	if(strstr((const char *)NBUart_RX.RX_Buf, AlarmOn) != NULL)
 	{
-		HAL_UART_Transmit(&huart4, AlarmOn_Command, 12, 0xff);       //发送打开报警器命令
+		HAL_UART_Transmit(&huart4, AlarmOn_Command, 12, 0xff);        //发送打开报警器命令
 	}
 
 	else if(strstr((const char *)NBUart_RX.RX_Buf, AlarmOff) != NULL)

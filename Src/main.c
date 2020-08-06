@@ -84,7 +84,6 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
-  
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -114,7 +113,7 @@ int main(void)
   MX_TIM2_Init();
   MX_USART2_UART_Init();
   MX_CAN_Init();
-//  MX_IWDG_Init();
+  MX_IWDG_Init();
   MX_ADC3_Init();
   MX_TIM3_Init();
 
@@ -123,7 +122,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
 
-//  HAL_IWDG_Init(&hiwdg);                //初始化并开启iwdg
+  HAL_IWDG_Init(&hiwdg);                //初始化并开启iwdg
   HAL_TIM_Base_Start_IT(&htim3);        //使能定时器3中断，1s进入一次，
   HAL_TIM_Base_Start_IT(&htim5);        //使能定时器5中断，5s进入一次，控制读取传感器数值频率
 
@@ -131,10 +130,12 @@ int main(void)
   //串口空闲中断初始化
   UART_IT_IDLE_InitAll();
 
-  //硬件初始化
-  Hardware_Init();         
+  //各硬件外设初始化
+  Hardware_Init();
 
+  //NB模组初始化
   NBiot_Init();
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -144,6 +145,7 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
 	Sensor_Task();
 	NBiot_Task();
 	Alarm_Task();
@@ -151,7 +153,7 @@ int main(void)
 //	LoraAnalysis();
 //	CanAnalysis();
 
-//	HAL_IWDG_Refresh(&hiwdg);     //喂狗，即重新加载计数值
+	HAL_IWDG_Refresh(&hiwdg);     //喂狗，即重新加载计数值
   }
   /* USER CODE END 3 */
 }
@@ -228,6 +230,15 @@ static void MX_NVIC_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+
+/*软件复位*/
+void McuReset(void)
+{
+//	__disable_fault_irq();
+    __set_FAULTMASK(1);           // 关闭所有中断
+    HAL_NVIC_SystemReset();
+}
 
 
 /* USER CODE END 4 */

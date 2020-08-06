@@ -10,7 +10,9 @@
 
 void Led_Init();
 void LED1_RUNNING_Blink();
-void LED2_MSGTX_Blink();
 
+void LED2_NETWORK_Searching();
+void LED2_NETWORK_Registered();
+void LED2_NETWORK_DataTransfer();
 
 #endif /* LED_H_ */

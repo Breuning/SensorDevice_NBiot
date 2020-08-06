@@ -81,7 +81,7 @@ static void Can_TxSensorData(FloatSensorDataType type)
 		Can_TxMessage(StandardFrame, CanSensor_FrameID, 4, CanSensorData.TransformedDataBuf);
 	}
 
-	HAL_GPIO_TogglePin(LED2_MSGTX_GPIO_Port, LED2_MSGTX_Pin);      //发送1包数据后LED2反转一次
+//	HAL_GPIO_TogglePin(LED2_MSGTX_GPIO_Port, LED2_MSGTX_Pin);      //发送1包数据后LED2反转一次
 
 	memset(CanSensorData.TransformedDataBuf, 0 , sizeof(CanSensorData.TransformedDataBuf));
 }
