@@ -21,6 +21,7 @@ extern BOOL NBiotTaskTimerFlag;
 
 extern void NBiot_Task();
 extern void NBiot_Init();
+extern void NBiot_POWD_PEN();               //硬件关闭模组电源
 
 typedef enum
 {

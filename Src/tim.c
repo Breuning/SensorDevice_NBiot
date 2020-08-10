@@ -285,7 +285,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)     //定时器中断回调
 
 		if(T5Count_McuReset >= 720)        //STM32定时重启(720为1小时)
 		{
-			McuReset();
+			NBiot_POWD_PEN();
+			HAL_Delay(200);
 			T5Count_McuReset = 0;
 		}
 

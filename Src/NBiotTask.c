@@ -21,7 +21,7 @@
 //static void NBiot_QMTOPEN();
 //static void NBiot_QMTCONN();
 
-static void NBiot_POWD_PEN();               //硬件关闭模组电源
+
 static void NBiot_CleanRXBuf();
 static void NBiot_Reset();
 static void NBiot_USIMConfig();

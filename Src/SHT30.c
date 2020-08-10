@@ -25,6 +25,7 @@ void SHT30_Init(void)
 
 void GetValidDataFromSHT30(void)
 {
+	MX_I2C1_Init();
 	HAL_I2C_Master_Transmit(&hi2c1, SHT30Addr_Write, SHT30_Modecommand_Buffer, 2, 1000);
 	HAL_Delay(5);
 	HAL_I2C_Master_Transmit(&hi2c1, SHT30Addr_Write, SHT30_Fetchcommand_Buffer, 2, 1000);     //发送获取传感器数据的命令
